@@ -73,5 +73,6 @@ document.getElementById("reset").addEventListener("click", resetGame);
     document.getElementById("reset").addEventListener('click', resetGame);
 
 
+document.getElementById("gameWins")
     
 
