@@ -5,6 +5,10 @@ let currentPlayer = "X";
 let gameBoard = ["", "", "", "", "", "", "", "", ""];
 let cells = document.querySelectorAll('.cell');
 let gameActive = true;
+let xWins = 0;
+let oWins = 0;
+let tie = 0;
+
 
 //Switches player turns from X to 0
 function handlePlayerTurn (clickedCellIndex) {
@@ -14,7 +18,7 @@ function handlePlayerTurn (clickedCellIndex) {
 
     gameBoard[clickedCellIndex] = currentPlayer;
     checkForWinOrDraw();
-    currentPlayer = currentPlayer == "x" ? "o" : "x"// if x went then o will go
+    currentPlayer = currentPlayer == "X" ? ")" : "X"// if x went then o will go
     
 }
 
@@ -27,9 +31,27 @@ function checkForWinOrDraw(){
                         [2, 5, 8],//third row
                         [0, 4, 8],//left diagonal
                         [2, 4, 6]];//right diagonal
+
+    for (let i = 0; i < winCondition; i++) {
+        const [a,b,c] = winCondition[i]
+        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+            gameActive = false;
+            document.getElementById.textContent = `${currentPlayer} Wins!`;
+            currentPlayer === "X" ? xWins++ : oWins;
+            return
+        }
+    }
+    if (!gameBoard.includes("")) {
+        document.getElementById("status").textContent = "Tie Game";
+        tie ++
+        gameActive =  false;
+    }
     
                                 
 }
+
+
+
     
 
 
