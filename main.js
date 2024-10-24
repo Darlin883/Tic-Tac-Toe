@@ -9,9 +9,11 @@ function handlePlayerTurn (clickedCellIndex) {
     }
 
     gameBoard[clickedCellIndex] = currentPlayer;
+    document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer;   
+
     checkForWinOrDraw();
-    currentPlayer = currentPlayer == "X" ? "O" : "X"// if x went then o will go
-    
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
 }
 
 function checkForWinOrDraw(){
@@ -33,7 +35,7 @@ function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];
     currentPlayer = "X";
     gameActive = true;
-    document.getElementById("status").textContent = `tIt's a ${currentPlayer}'s turn`;
+    document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
 
     //clear the board
     for(let i = 0; i < cells.length; i++){
@@ -45,6 +47,7 @@ function resetGame(){
             handlePlayerTurn(index);
         });
     })
+    document.getElementById("reset").addEventListener('click', resetGame);
 }
 
     
