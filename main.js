@@ -9,7 +9,9 @@ let xWins = 0;
 let oWins = 0;
 let tie = 0;
 
-
+let xScore = document.getElementById("XScore");
+let tScore = document.getElementById("tieScore");
+let oScore = document.getElementById("OScore");
 //Switches player turns from X to 0
 function handlePlayerTurn (clickedCellIndex) {
     if (gameBoard[clickedCellIndex] !== "" || !gameActive) {
@@ -39,18 +41,34 @@ function checkForWinOrDraw(){
         if (toWin) {
             gameActive = false;
             document.getElementById("status").textContent = `${currentPlayer} Wins!`;
-            currentPlayer === "X" ? xWins++ : oWins++;
+            if(currentPlayer === "X"){
+                xWins++
+                xScore.innerText = xWins;
+            }else{
+                oWins++;
+                oScore.innerText = oWins;
+            }
             return;
         }
     }
          if (!gameBoard.includes("")){
         document.getElementById("status").textContent = `Tie Game`;
-        tie ++;
+        tie++;
+        tScore.innerText = tie;
         gameActive = false
         return;
         }
     document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
     
+}
+
+function resetScore(){
+    xWins = 0;
+    oWins = 0;
+    tie = 0;
+    xScore.innerText = xWins;
+    oScore.innerText = oWins;
+    tScore.innerText = tie;
 }
 
 function resetGame(){
@@ -64,14 +82,14 @@ function resetGame(){
         cells[i].textContent = "";
     }
 }
-document.getElementById("reset").addEventListener("click", resetGame);
+
     cells.forEach((cell,index) =>{
         cell.addEventListener('click', function(){
             handlePlayerTurn(index);
         });
     })
     document.getElementById("reset").addEventListener('click', resetGame);
-
+    document.getElementById("reset-score").addEventListener("click",  resetScore);
 
 document.getElementById("gameWins")
     
