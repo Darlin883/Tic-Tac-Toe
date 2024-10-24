@@ -19,7 +19,7 @@ function handlePlayerTurn (clickedCellIndex) {
     gameBoard[clickedCellIndex] = currentPlayer;
     checkForWinOrDraw();
     currentPlayer = currentPlayer == "X" ? "O" : "X"// if x went then o will go
-    currentPlayer = currentPlayer == "X" ? ")" : "X"// if x went then o will go
+   
     
 }
 
@@ -33,36 +33,13 @@ function checkForWinOrDraw(){
                         [0, 4, 8],//left diagonal
                         [2, 4, 6]];//right diagonal
      
-    let roundWon = false;
-
-
-}
-
-function resetGame(){
-    gameBoard =["", "", "", "", "", "",  "", "", ""];
-    currentPlayer = "X";
-    gameActive = true;
-    document.getElementById("status").textContent = `tIt's a ${currentPlayer}'s turn`;
-
-    //clear the board
-    for(let i = 0; i < cells.length; i++){
-        cells[i].textContent = "";
-    }
-
-    cells.forEach((cell,index) =>{
-        cell.addEventListener('click', function(){
-            handlePlayerTurn(index);
-        });
-    })
-}
-
-
-    for (let i = 0; i < winCondition; i++) {
+   
+    for (let i = 0; i < winCondition.length; i++) {
         const [a,b,c] = winCondition[i]
         if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
             gameActive = false;
-            document.getElementById.textContent = `${currentPlayer} Wins!`;
-            currentPlayer === "X" ? xWins++ : oWins;
+            document.getElementById("status").textContent = `${currentPlayer} Wins!`;
+            currentPlayer === "X" ? xWins++ : oWins++;
             return
         }
     }
@@ -71,9 +48,32 @@ function resetGame(){
         tie ++
         gameActive =  false;
     }
-    
-                                
+
+
 }
+
+function resetGame(){
+    gameBoard =["", "", "", "", "", "",  "", "", ""];
+    currentPlayer = "X";
+    gameActive = true;
+    document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
+
+    //clear the board
+    for(let i = 0; i < cells.length; i++){
+        cells[i].textContent = "";
+    }
+}
+document.getElementById("reset").addEventListener("click", resetGame);
+    cells.forEach((cell,index) =>{
+        cell.addEventListener('click', function(){
+            handlePlayerTurn(index);
+        });
+    })
+
+
+
+                  
+
 
 
 
