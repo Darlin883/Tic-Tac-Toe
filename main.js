@@ -1,8 +1,16 @@
+
+//Starts player with X
 let currentPlayer = "X";
+//Game board has 9 empty cells
 let gameBoard = ["", "", "", "", "", "", "", "", ""];
 let cells = document.querySelectorAll('.cell');
 let gameActive = true;
+let xWins = 0;
+let oWins = 0;
+let tie = 0;
 
+
+//Switches player turns from X to 0
 function handlePlayerTurn (clickedCellIndex) {
     if (gameBoard[clickedCellIndex] !== "" || !gameActive) {
         return;
@@ -26,7 +34,21 @@ function checkForWinOrDraw(){
                         [0, 4, 8],//left diagonal
                         [2, 4, 6]];//right diagonal
      
-    let roundWon = false;
+   
+    for (let i = 0; i < winCondition.length; i++) {
+        const [a,b,c] = winCondition[i]
+        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+            gameActive = false;
+            document.getElementById("status").textContent = `${currentPlayer} Wins!`;
+            currentPlayer === "X" ? xWins++ : oWins++;
+            return
+        }
+    }
+    if (!gameBoard.includes("")) {
+        document.getElementById("status").textContent = "Tie Game";
+        tie ++
+        gameActive =  false;
+    }
 
 
 }
@@ -41,7 +63,8 @@ function resetGame(){
     for(let i = 0; i < cells.length; i++){
         cells[i].textContent = "";
     }
-
+}
+document.getElementById("reset").addEventListener("click", resetGame);
     cells.forEach((cell,index) =>{
         cell.addEventListener('click', function(){
             handlePlayerTurn(index);
