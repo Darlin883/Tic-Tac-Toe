@@ -21,7 +21,7 @@ function handlePlayerTurn (clickedCellIndex) {
 
     checkForWinOrDraw();
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
+    // document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
 }
 
 function checkForWinOrDraw(){
@@ -33,31 +33,31 @@ function checkForWinOrDraw(){
                         [2, 5, 8],//third row
                         [0, 4, 8],//left diagonal
                         [2, 4, 6]];//right diagonal
-     
-   
     for (let i = 0; i < winCondition.length; i++) {
         const [a,b,c] = winCondition[i]
-        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+        let toWin = gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+        if (toWin) {
             gameActive = false;
             document.getElementById("status").textContent = `${currentPlayer} Wins!`;
             currentPlayer === "X" ? xWins++ : oWins++;
-            return
+            return;
         }
     }
-    if (!gameBoard.includes("")) {
-        document.getElementById("status").textContent = "Tie Game";
-        tie ++
-        gameActive =  false;
-    }
-
-
+         if (!gameBoard.includes("")){
+        document.getElementById("status").textContent = `Tie Game`;
+        tie ++;
+        gameActive = false
+        return;
+        }
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
+    
 }
 
 function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];
     currentPlayer = "X";
     gameActive = true;
-    document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
+   
 
     //clear the board
     for(let i = 0; i < cells.length; i++){
@@ -71,7 +71,7 @@ document.getElementById("reset").addEventListener("click", resetGame);
         });
     })
     document.getElementById("reset").addEventListener('click', resetGame);
-}
+
 
     
 
