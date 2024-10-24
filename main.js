@@ -36,19 +36,23 @@ function checkForWinOrDraw(){
      
    
     for (let i = 0; i < winCondition.length; i++) {
-        const [a,b,c] = winCondition[i]
+        const [a,b,c] = winCondition[i];
         if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
             gameActive = false;
             document.getElementById("status").textContent = `${currentPlayer} Wins!`;
             currentPlayer === "X" ? xWins++ : oWins++;
             return
-        }
-    }
-    if (!gameBoard.includes("")) {
+        } else if (!gameBoard.includes("")) {
         document.getElementById("status").textContent = "Tie Game";
-        tie ++
+        tie++;
         gameActive =  false;
+     }
     }
+   
+
+    //if all spot's are filled up and X and O didnt win it's a tie
+
+
 
 
 }
@@ -57,7 +61,7 @@ function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];// get's space on the board
     currentPlayer = "X";
     gameActive = true;
-    document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
+    // document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
 
     //clear the board
     for(let i = 0; i < cells.length; i++){
@@ -71,7 +75,4 @@ document.getElementById("reset").addEventListener("click", resetGame);
         });
     })
     document.getElementById("reset").addEventListener('click', resetGame);
-}
-
-    
 
