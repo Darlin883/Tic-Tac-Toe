@@ -17,10 +17,11 @@ function handlePlayerTurn (clickedCellIndex) {
     }
 
     gameBoard[clickedCellIndex] = currentPlayer;
+    document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer;   
+
     checkForWinOrDraw();
-    currentPlayer = currentPlayer == "X" ? "O" : "X"// if x went then o will go
-   
-    
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
 }
 
 function checkForWinOrDraw(){
@@ -69,16 +70,8 @@ document.getElementById("reset").addEventListener("click", resetGame);
             handlePlayerTurn(index);
         });
     })
-
-
-
-                  
-
-
-
-
-    
-
+    document.getElementById("reset").addEventListener('click', resetGame);
+}
 
     
 
