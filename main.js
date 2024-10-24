@@ -32,7 +32,7 @@ function checkForWinOrDraw(){
 }
 
 function resetGame(){
-    gameBoard =["", "", "", "", "", "",  "", "", ""];
+    gameBoard =["", "", "", "", "", "",  "", "", ""];// get's space on the board
     currentPlayer = "X";
     gameActive = true;
     document.getElementById("status").textContent = `It's a ${currentPlayer}'s turn`;
