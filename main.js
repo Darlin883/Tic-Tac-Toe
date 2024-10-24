@@ -18,6 +18,7 @@ function handlePlayerTurn (clickedCellIndex) {
 
     gameBoard[clickedCellIndex] = currentPlayer;
     checkForWinOrDraw();
+    currentPlayer = currentPlayer == "X" ? "O" : "X"// if x went then o will go
     currentPlayer = currentPlayer == "X" ? ")" : "X"// if x went then o will go
     
 }
@@ -31,6 +32,30 @@ function checkForWinOrDraw(){
                         [2, 5, 8],//third row
                         [0, 4, 8],//left diagonal
                         [2, 4, 6]];//right diagonal
+     
+    let roundWon = false;
+
+
+}
+
+function resetGame(){
+    gameBoard =["", "", "", "", "", "",  "", "", ""];
+    currentPlayer = "X";
+    gameActive = true;
+    document.getElementById("status").textContent = `tIt's a ${currentPlayer}'s turn`;
+
+    //clear the board
+    for(let i = 0; i < cells.length; i++){
+        cells[i].textContent = "";
+    }
+
+    cells.forEach((cell,index) =>{
+        cell.addEventListener('click', function(){
+            handlePlayerTurn(index);
+        });
+    })
+}
+
 
     for (let i = 0; i < winCondition; i++) {
         const [a,b,c] = winCondition[i]
