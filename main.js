@@ -23,10 +23,7 @@ function handlePlayerTurn (clickedCellIndex) {
         // if the cell is already taken (not an empty string) or the game is not active, do nothing and leaves the function
     }
 
-    // update the gameboard with the current player's move
-    gameBoard[clickedCellIndex] = currentPlayer;
-    document.getElementById(`cell-${clickedCellIndex}`).textContent = nextPlayer;  
-
+    // update the gameboard with the current player's move  
     gameBoard[clickedCellIndex] = currentPlayer;
     document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer;   
     // this updates the gameboard array with the current player's symbol ('X' or 'O')
@@ -37,9 +34,11 @@ function handlePlayerTurn (clickedCellIndex) {
     // After making the move the function checks if the game has been won or not
 
     // this line switches between X and O for the next turn
+    if(gameActive) {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     nextPlayer = nextPlayer === "O" ? "X" : "O";
-    
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`;
+    }
 }
 
 function checkForWinOrDraw(){
@@ -72,6 +71,9 @@ function checkForWinOrDraw(){
                 oWins++;
                 oScore.innerText = oWins;
             }
+
+            currentPlayer = winnerPlayer;
+            nextPlayer = winnerPlayer === "X" ? "O" : "X";
             return;
         }
     }       //checks for draws (if all cells are filled and no winner)
@@ -85,11 +87,12 @@ function checkForWinOrDraw(){
 
     // if there is no win or draw the status to show whose turn it is
      
-    if(currentPlayer){
-        document.getElementById("status").textContent = `It's ${nextPlayer}'s turn`;
-        currentPlayer === "X";
-        return "O";
-    }
+    // if(currentPlayer){//WInner's value goes
+    //     document.getElementById("status").textContent = `It's ${nextPlayer}'s turn`;
+    //     currentPlayer === "X";
+    //     return "O";
+    // }
+   
 }
 
 function resetScore(){// reset's score to 0
@@ -104,14 +107,13 @@ function resetScore(){// reset's score to 0
 function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];// get the gameboard back to its original state
 
-    // winnerPlayer;
-    currentPlayer = "X";// starts with X always
-    nextPlayer = "O";
+    // currentPlayer = "X";// starts with X always
+    // nextPlayer = "O";
 
     gameActive = true;//starts the game
 
-    document.getElementById("status").textContent = `It's ${winnerPlayer}'s turn`;
-
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`;
+    
     //clear the board
     //empty's out everyspace on the board
     for(let i = 0; i < cells.length; i++){
