@@ -1,6 +1,7 @@
 
 //Starts player with X
 let currentPlayer = "X";
+
 //Game board has 9 empty cells
 let gameBoard = ["", "", "", "", "", "", "", "", ""];
 let cells = document.querySelectorAll('.cell');// selets all cells in the game board
@@ -23,7 +24,9 @@ function handlePlayerTurn (clickedCellIndex) {
 
     // update the gameboard with the current player's move
     gameBoard[clickedCellIndex] = currentPlayer;
-    document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer;   
+    
+    
+    document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer; 
     // this updates the gameboard array with the current player's symbol ('X' or 'O')
     // also updates it so that is shows up on the displat 'X' and 'O'
     
