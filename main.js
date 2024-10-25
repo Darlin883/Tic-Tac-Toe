@@ -1,6 +1,8 @@
 
 //Starts player with X
 let currentPlayer = "X";
+let nextPlayer = "O";
+let winnerPlayer;
 //Game board has 9 empty cells
 let gameBoard = ["", "", "", "", "", "", "", "", ""];
 let cells = document.querySelectorAll('.cell');// selets all cells in the game board
@@ -23,6 +25,9 @@ function handlePlayerTurn (clickedCellIndex) {
 
     // update the gameboard with the current player's move
     gameBoard[clickedCellIndex] = currentPlayer;
+    document.getElementById(`cell-${clickedCellIndex}`).textContent = nextPlayer;  
+
+    gameBoard[clickedCellIndex] = currentPlayer;
     document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer;   
     // this updates the gameboard array with the current player's symbol ('X' or 'O')
     // also updates it so that is shows up on the displat 'X' and 'O'
@@ -33,6 +38,7 @@ function handlePlayerTurn (clickedCellIndex) {
 
     // this line switches between X and O for the next turn
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+    nextPlayer = nextPlayer === "O" ? "X" : "O";
     
 }
 
@@ -57,8 +63,9 @@ function checkForWinOrDraw(){
         let toWin = gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
         if (toWin) {
             gameActive = false;//game is over
-            document.getElementById("status").textContent = `${currentPlayer} Wins!`;//player who won is diplayed
-            if(currentPlayer === "X"){// if currentPlayer is X, then XScore is added
+            winnerPlayer = currentPlayer; 
+            document.getElementById("status").textContent = `${winnerPlayer} Wins!`;//player who won is diplayed
+            if(winnerPlayer === "X"){// if currentPlayer is X, then XScore is added
                 xWins++
                 xScore.innerText = xWins;
             }else{// else  OScore is added
@@ -77,8 +84,12 @@ function checkForWinOrDraw(){
         }
 
     // if there is no win or draw the status to show whose turn it is
-    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`; //update status
-    //fix this line
+     
+    if(currentPlayer){
+        document.getElementById("status").textContent = `It's ${nextPlayer}'s turn`;
+        currentPlayer === "X";
+        return "O";
+    }
 }
 
 function resetScore(){// reset's score to 0
@@ -93,9 +104,13 @@ function resetScore(){// reset's score to 0
 function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];// get the gameboard back to its original state
 
+    // winnerPlayer;
     currentPlayer = "X";// starts with X always
+    nextPlayer = "O";
+
     gameActive = true;//starts the game
-   
+
+    document.getElementById("status").textContent = `It's ${winnerPlayer}'s turn`;
 
     //clear the board
     //empty's out everyspace on the board
