@@ -1,13 +1,17 @@
 body{
-    font-family: 'Arial',sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center; 
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: azure;
-    color: black;
+    background-image: url(https://th.bing.com/th/id/R.5dc128d4ff082b92a9208670789ae6ab?rik=%2bJioYcZ9YFWHcQ&riu=http%3a%2f%2fwallpapercave.com%2fwp%2f5KnwccW.jpg&ehk=rqBnvdCAZSRIFdR2nF067gQBHeiMGmFxjEBmNXXKAhw%3d&risl=&pid=ImgRaw&r=0);
+    color: white;
+    font-style: italic;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: hotpink;
+    text-shadow: 5px 5px 5px hotpink;
 }
 
 #tic-tac-toe-board{
@@ -21,14 +25,31 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 2rem;
     width:100px;
     height: 100px;
-    background-color: aquamarine;
+    background-color:fuchsia;
     
     
 }
 .cell:hover{
-    background-color: #e3e3e3;
+    background-color:darkorchid;
+}
+
+
+    
+
+button {
+   
+    font-size: 30px;
+    background-color:fuchsia;
+}
+
+#status {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 25px;
 }
