@@ -3,10 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div></div>
+<h1>TIC TAC TOE</h1>
+    <div id ="tic-tac-toe-board">
+        <div class ="row">
+            <div class="cell" id="cell-0"></div>
+            <div class="cell" id="cell-1"></div>
+            <div class="cell" id="cell-2"></div>
+        </div>
+
+        <div class ="row">
+            <div class="cell" id="cell-3"></div>
+            <div class="cell" id="cell-4"></div>
+            <div class="cell" id="cell-5"></div>
+        </div>
     
+        <div class ="row">
+            <div class="cell" id="cell-6"></div>
+            <div class="cell" id="cell-7"></div>
+            <div class="cell" id="cell-8"></div>
+        </div>
+    </div>
+    <br>
+    <div id="status" class="status-message"></div>
+    <div>
+        <button id="reset-score">RESET SCORE</button>
+        <button id="reset">RESET GAME</button>
+    </div>
+    <div style="width:200px;height: 200px;">
+        <h3>X WINS: <span id="XScore">0</span></h3>
+        <h3>TIES: <span id="tieScore">0</span></h3>
+        <h3>O WINS: <span id="OScore">0</span></h3>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
