@@ -2,7 +2,7 @@
 //Starts player with X
 let currentPlayer = "X";
 let nextPlayer = "O";
-let winnerPlayer;
+let winnerPlayer;// winner of the match
 //Game board has 9 empty cells
 let gameBoard = ["", "", "", "", "", "", "", "", ""];
 let cells = document.querySelectorAll('.cell');// selets all cells in the game board
@@ -26,7 +26,6 @@ function handlePlayerTurn (clickedCellIndex) {
     // update the gameboard with the current player's move  
     gameBoard[clickedCellIndex] = currentPlayer;
     
-    
     document.getElementById(`cell-${clickedCellIndex}`).textContent = currentPlayer; 
     // this updates the gameboard array with the current player's symbol ('X' or 'O')
     // also updates it so that is shows up on the displat 'X' and 'O'
@@ -37,23 +36,18 @@ function handlePlayerTurn (clickedCellIndex) {
 
     // this line switches between X and O for the next turn
     if(gameActive) {
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    nextPlayer = nextPlayer === "O" ? "X" : "O";
-    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`;
+    currentPlayer = currentPlayer === "X" ? "O" : "X";//current player
+    nextPlayer = nextPlayer === "O" ? "X" : "O";// next Player
+    document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`;// status of which player is going
     }
 }
 
 function checkForWinOrDraw(){
     //winning conditons (all possible ways to win the game)
     let winCondition = [
-        [0, 1, 2],//first column
-        [3, 4, 5],//second column
-        [6, 7, 8],//third column
-        [0, 3, 6],//top row
-        [1, 4, 7],//second row
-        [2, 5, 8],//third row
-        [0, 4, 8],//left diagonal
-        [2, 4, 6]//right diagonal
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],// column's
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],// row's
+        [0, 4, 8], [2, 4, 6]// diagonal's
     ];
 
     // checks each winning condition
@@ -64,7 +58,7 @@ function checkForWinOrDraw(){
         let toWin = gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
         if (toWin) {
             gameActive = false;//game is over
-            winnerPlayer = currentPlayer; 
+            winnerPlayer = currentPlayer; //makes current player who  won the game winnerPlayer
             document.getElementById("status").textContent = `${winnerPlayer} Wins!`;//player who won is diplayed
             if(winnerPlayer === "X"){// if currentPlayer is X, then XScore is added
                 xWins++
@@ -74,9 +68,9 @@ function checkForWinOrDraw(){
                 oScore.innerText = oWins;
             }
 
-            currentPlayer = winnerPlayer;
-            nextPlayer = winnerPlayer === "X" ? "O" : "X";
-            return;
+            currentPlayer = winnerPlayer;// sets current player to winner and ensures that anywhere else on the board will be winner
+            nextPlayer = winnerPlayer === "X" ? "O" : "X";// this sets the value of whoever's the winner the nextplayer will be the opposite and vice versa
+            return;// this line exits the checkofWinOrDraw
         }
     }       //checks for draws (if all cells are filled and no winner)
          if (!gameBoard.includes("")){
@@ -86,15 +80,6 @@ function checkForWinOrDraw(){
         gameActive = false// stop the game as a tie
         return;// exit the function since the game is a tie
         }
-
-    // if there is no win or draw the status to show whose turn it is
-     
-    // if(currentPlayer){//WInner's value goes
-    //     document.getElementById("status").textContent = `It's ${nextPlayer}'s turn`;
-    //     currentPlayer === "X";
-    //     return "O";
-    // }
-   
 }
 
 function resetScore(){// reset's score to 0
@@ -108,10 +93,6 @@ function resetScore(){// reset's score to 0
 
 function resetGame(){
     gameBoard =["", "", "", "", "", "",  "", "", ""];// get the gameboard back to its original state
-
-    // currentPlayer = "X";// starts with X always
-    // nextPlayer = "O";
-
     gameActive = true;//starts the game
 
     document.getElementById("status").textContent = `It's ${currentPlayer}'s turn`;
@@ -135,7 +116,3 @@ function resetGame(){
     // to reset the game or score
     document.getElementById("reset").addEventListener('click', resetGame);
     document.getElementById("reset-score").addEventListener("click",  resetScore);
-
-// document.getElementById("gameWins")
-    
-
